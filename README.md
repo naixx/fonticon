@@ -1,4 +1,9 @@
-FontIcon Library
+FontIcon2 Library
+====
+
+FontIcon2 is based on FontIcon and adds best features of [Iconify][8] library
+Generally usages are the same. Differences are at 8
+
 ====
 
 Android FontIcon is simple library which use font-based icons in Android.
@@ -10,15 +15,17 @@ Permament link to [project's page][1].
 Gradle dependency
 ----
 
-    repositories {
-        maven {
-            url 'http://repo.shamanland.com'
-        }
+```groovy
+repositories {
+    maven {
+        url 'http://repo.shamanland.com'
     }
+}
 
-    dependencies {
-        compile 'com.shamanland:fonticon:0.1.+'
-    }
+dependencies {
+    compile 'com.shamanland:fonticon:0.1.+'
+}
+```
 
 Usage
 ----
@@ -35,67 +42,95 @@ Read this [manual][5] for details. In case of fontastic use [this util][3].
 
 [**res/xml/ic_android.xml**][6]
 
-    <?xml version="1.0" encoding="utf-8"?>
-    <font-icon
-            xmlns:android="http://schemas.android.com/apk/res-auto"
-            android:text="@string/ic_android"
-            android:textSize="@dimen/big_icon_size"
-            android:textColor="@color/green_170"
-            />
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<font-icon
+    xmlns:android="http://schemas.android.com/apk/res-auto"
+    android:text="@string/ic_android"
+    android:textSize="@dimen/big_icon_size"
+    android:textColor="@color/green_170"
+    />
+```
 
 **4. Inflate your FontIconDrawable in Java**
 
-    Drawable icon = FontIconDrawable.inflate(getResources(), R.xml.ic_android);
+```java
+Drawable icon = FontIconDrawable.inflate(getResources(), R.xml.ic_android);
+```
 
 **5. Use your FontIconDrawable as compound for TextView or Button (in res/layout with custom class)**
 
-    <com.shamanland.fonticon.FontIconTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Dummy text"
-            app:iconLeft="@xml/ic_android"
-            />
+```xml
+<com.shamanland.fonticon.FontIconTextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Dummy text"
+    app:iconLeft="@xml/ic_android"
+    />
 
-    <com.shamanland.fonticon.FontIconButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Dummy text"
-            app:iconLeft="@xml/ic_button_yes"
-            />
+<com.shamanland.fonticon.FontIconButton
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Dummy text"
+    app:iconLeft="@xml/ic_button_yes"
+    />
+```
 
 **6. Use your FontIconDrawable as compound for TextView (in Java-code with platform class)**
 
-    Drawable icon = FontIconDrawable.inflate(getResources(), R.xml.ic_android);
-    TextView tv = (TextView) result.findViewById(R.id.my_textview_or_button);
-    tv.setCompoundDrawables(icon, null, null, null);
+```java
+Drawable icon = FontIconDrawable.inflate(getResources(), R.xml.ic_android);
+TextView tv = (TextView) result.findViewById(R.id.my_textview_or_button);
+tv.setCompoundDrawables(icon, null, null, null);
+```
 
 **7. Use FontIconView as single icon in your layout**
 
-    <com.shamanland.fonticon.FontIconView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/ic_android"
-            android:textSize="@dimen/icon_size"
-            android:textColor="@color/icon_color"
-            />
+```xml
+<com.shamanland.fonticon.FontIconView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="@string/ic_android"
+    android:textSize="@dimen/icon_size"
+    android:textColor="@color/icon_color"
+    />
+```
 
-**8. Add glowing effect on touch for your FontIconView**
+**8. Using symbol aliases**
+
+If you need icons on a `TextView`, use the `{ }` syntax. You can put any text around it and have more than one icon in the text. Note that the shadows apply to the icons as well. (Inspired by Iconify)
+
+```xml
+<com.shamanland.fonticon.FontIconView
+    android:text="{android}"
+    android:shadowColor="#22000000"
+    android:textSize="90dp"
+    android:textColor="#FF33B5E5"
+    ... />
+```
+
+> You can either use ```IconTextView``` / ```ButtonTextView``` or use any ```TextView``` and then programmatically call ```Iconify.addIcons(myTextView);```.
+
+> If you need another template separators instead of `{ }`, you can set them at the start of your application with `Icons.setParseDelimiters("[", "]")`
+
+**9. Add glowing effect on touch for your FontIconView**
 
 [**res/layout/f_glowing.xml**][7]
 
-    <com.shamanland.fonticon.FontIconView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/icon_glow_radius"
-            android:text="@string/ic_googleplus"
-            android:textSize="@dimen/big_icon_size"
-            android:textColor="@color/pressed_googleplus"
-            android:clickable="true"
-            app:overridePressed="true"
-            app:pressedGlowColor="@color/googleplus"
-            app:pressedGlowRadius="@dimen/icon_glow_radius"
-            />
-
+```xml
+<com.shamanland.fonticon.FontIconView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/icon_glow_radius"
+        android:text="@string/ic_googleplus"
+        android:textSize="@dimen/big_icon_size"
+        android:textColor="@color/pressed_googleplus"
+        android:clickable="true"
+        app:overridePressed="true"
+        app:pressedGlowColor="@color/googleplus"
+        app:pressedGlowRadius="@dimen/icon_glow_radius"
+        />
+```
 Branches
 ----
 
@@ -116,3 +151,4 @@ Tools
 [5]: http://blog.shamanland.com/2013/11/how-to-use-icon-fonts-in-android.html
 [6]: http://github.com/shamanland/fonticon/blob/dev/app/src/main/res/xml/ic_android.xml
 [7]: http://github.com/shamanland/fonticon/blob/dev/app/src/main/res/layout/f_glowing.xml
+[8]: http://github.com/JoanZapata/android-iconify/
