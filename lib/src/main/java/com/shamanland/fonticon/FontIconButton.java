@@ -5,6 +5,7 @@ import android.util.AttributeSet;
 import android.widget.Button;
 
 public class FontIconButton extends Button {
+
     public FontIconButton(Context context) {
         super(context);
     }
@@ -13,6 +14,7 @@ public class FontIconButton extends Button {
         super(context, attrs);
 
         if (!isInEditMode()) {
+            Icons.iconify(this);
             CompoundDrawables.init(context, attrs, this);
         }
     }
@@ -21,6 +23,7 @@ public class FontIconButton extends Button {
         super(context, attrs, defStyle);
 
         if (!isInEditMode()) {
+            Icons.iconify(this);
             CompoundDrawables.init(context, attrs, this);
         }
     }

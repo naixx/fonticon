@@ -4,11 +4,18 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:0.8.1'
+        classpath 'com.android.tools.build:gradle:0.9.+'
+        classpath 'com.github.dcendents:android-maven-plugin:1.0'
     }
 }
 
+
 apply plugin: 'android-library'
+apply plugin: 'android-maven'
+
+version '0.2'
+group 'com.shamanland.fonticon2'
+
 
 repositories {
     mavenCentral()
@@ -24,4 +31,23 @@ android {
     }
 }
 
-apply from: 'https://raw.github.com/shamanland/gradle-mvn-push/master/gradle-mvn-push.gradle'
+//apply from: 'https://raw.github.com/shamanland/gradle-mvn-push/master/gradle-mvn-push.gradle'
+
+task androidJavadocs(type: Javadoc) {
+    source = android.sourceSets.main.allJava
+}
+
+task androidJavadocsJar(type: Jar) {
+    classifier = 'javadoc'
+    from androidJavadocs.destinationDir
+}
+
+task androidSourcesJar(type: Jar) {
+    classifier = 'sources'
+    from android.sourceSets.main.allSource
+}
+
+artifacts {
+    archives androidSourcesJar
+    archives androidJavadocsJar
+}

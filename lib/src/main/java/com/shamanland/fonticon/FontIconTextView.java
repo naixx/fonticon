@@ -5,6 +5,7 @@ import android.util.AttributeSet;
 import android.widget.TextView;
 
 public class FontIconTextView extends TextView {
+
     public FontIconTextView(Context context) {
         super(context);
     }
@@ -13,6 +14,7 @@ public class FontIconTextView extends TextView {
         super(context, attrs);
 
         if (!isInEditMode()) {
+            Icons.iconify(this);
             CompoundDrawables.init(context, attrs, this);
         }
     }
@@ -21,6 +23,7 @@ public class FontIconTextView extends TextView {
         super(context, attrs, defStyle);
 
         if (!isInEditMode()) {
+            Icons.iconify(this);
             CompoundDrawables.init(context, attrs, this);
         }
     }
